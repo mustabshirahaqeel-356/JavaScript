@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,29 @@
     </header>
 
     <main>
+
+        <section class="explorer">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search for a drink..."
+            >
+
+            <div class="categories">
+                <button class="active" data-category="All">All</button>
+                <button data-category="Hot Tea">Hot Tea</button>
+                <button data-category="Coffee">Coffee</button>
+                <button data-category="Cold Coffee">Cold Coffee</button>
+                <button data-category="Cold Drink">Cold Drink</button>
+            </div>
+
+            <p id="count"></p>
+
+        </section>
+
         <div id="list"></div>
+
     </main>
 
     <script src="app.js" defer></script>

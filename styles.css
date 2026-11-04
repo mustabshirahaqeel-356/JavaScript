@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +11,7 @@ body {
     color: #39271e;
 }
 
-/* Heading section */
+/* Header */
 
 header {
     text-align: center;
@@ -29,13 +30,72 @@ header p {
     color: #e4d1bd;
 }
 
-/* Cards container */
+/* Explorer section */
+
+.explorer {
+    max-width: 1100px;
+    margin: 35px auto 10px;
+    padding: 0 25px;
+}
+
+#search {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d6c3b2;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    background-color: #fffaf4;
+    color: #39271e;
+}
+
+#search:focus {
+    border-color: #79553f;
+    box-shadow: 0 0 5px rgba(73, 49, 38, 0.2);
+}
+
+/* Category buttons */
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.categories button {
+    padding: 10px 18px;
+    border: 1px solid #79553f;
+    border-radius: 25px;
+    background-color: transparent;
+    color: #493126;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.categories button:hover,
+.categories button.active {
+    background-color: #493126;
+    color: white;
+}
+
+/* Count */
+
+#count {
+    margin: 15px 0;
+    color: #806b5c;
+    font-size: 14px;
+}
+
+/* Cards layout */
 
 #list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
-    padding: 40px;
+    padding: 25px 40px 45px;
     max-width: 1400px;
     margin: auto;
 }
@@ -54,16 +114,12 @@ header p {
     transform: translateY(-6px);
 }
 
-/* Drink images */
-
 .card img {
     width: 100%;
     height: 210px;
     object-fit: cover;
     display: block;
 }
-
-/* Card information */
 
 .card-content {
     padding: 18px;
@@ -91,10 +147,37 @@ header p {
     display: inline-block;
     padding: 6px 12px;
     border-radius: 20px;
-    background-color: #e3eee1;
-    color: #426342;
     font-size: 13px;
     font-weight: bold;
+}
+
+.available {
+    background-color: #e3eee1;
+    color: #426342;
+}
+
+.sold-out {
+    background-color: #f5dddd;
+    color: #a33c3c;
+}
+
+/* Empty state */
+
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #fffaf4;
+    border-radius: 15px;
+}
+
+.empty h2 {
+    margin-bottom: 12px;
+    color: #493126;
+}
+
+.empty p {
+    color: #927765;
 }
 
 /* Responsive layout */
@@ -106,13 +189,26 @@ header p {
 }
 
 @media (max-width: 600px) {
-    #list {
-        grid-template-columns: 1fr;
-        padding: 20px;
-    }
 
     header h1 {
         font-size: 28px;
+    }
+
+    .explorer {
+        padding: 0 18px;
+    }
+
+    .categories {
+        gap: 8px;
+    }
+
+    .categories button {
+        padding: 9px 13px;
+    }
+
+    #list {
+        grid-template-columns: 1fr;
+        padding: 20px;
     }
 
     .card img {

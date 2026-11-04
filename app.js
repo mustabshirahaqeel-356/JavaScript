@@ -1,3 +1,4 @@
+
 const drinks = [
     {
         id: 1,
@@ -65,30 +66,99 @@ const drinks = [
     }
 ];
 
+// Search and category variables
+let searchText = "";
+let category = "All";
+
+// HTML elements
 const list = document.getElementById("list");
+const search = document.getElementById("search");
+const count = document.getElementById("count");
+const buttons = document.querySelectorAll(".categories button");
 
-const cards = drinks.map(drink => {
-    return `
-        <div class="card">
+// This function displays the drink cards
+function render(items) {
 
-            <img src="${drink.image}" alt="${drink.name}">
+    const cards = items.map(drink => {
+        return `
+            <div class="card">
 
-            <div class="card-content">
+                <img src="${drink.image}" alt="${drink.name}">
 
-                <h2>${drink.name}</h2>
+                <div class="card-content">
 
-                <p class="type">${drink.type}</p>
+                    <h2>${drink.name}</h2>
 
-                <p class="price">Rs. ${drink.price}</p>
+                    <p class="type">${drink.type}</p>
 
-                <p class="status">
-                    ${drink.available ? "Available" : "Sold Out"}
-                </p>
+                    <p class="price">Rs. ${drink.price}</p>
+
+                    <p class="status ${drink.available ? "available" : "sold-out"}">
+                        ${drink.available ? "Available" : "Sold Out"}
+                    </p>
+
+                </div>
 
             </div>
+        `;
+    });
 
-        </div>
-    `;
+    list.innerHTML = cards.join("");
+}
+
+// This function searches and filters the drinks
+function update() {
+
+    const filteredDrinks = drinks.filter(drink => {
+
+        const matchesSearch = drink.name.toLowerCase().includes(searchText.toLowerCase());
+
+        const matchesCategory = category === "All" || drink.type === category;
+
+        return matchesSearch && matchesCategory;
+
+    });
+
+    count.textContent = `Showing ${filteredDrinks.length} of ${drinks.length}`;
+
+    // Show a message if no drinks match
+    if (filteredDrinks.length === 0) {
+        list.innerHTML = `
+            <div class="empty">
+                <h2>No drinks found!</h2>
+                <p>Try searching for something else.</p>
+            </div>
+        `;
+    } else {
+        render(filteredDrinks);
+    }
+}
+
+// Search as the user types
+search.addEventListener("input", function() {
+
+    searchText = search.value;
+
+    update();
+
 });
 
-list.innerHTML = cards.join("");
+// Category button events
+buttons.forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        category = button.dataset.category;
+
+        buttons.forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        update();
+
+    });
+
+});
+
+// Display all drinks when the page opens
+update();
